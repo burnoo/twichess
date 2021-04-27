@@ -1,12 +1,17 @@
 import Head from 'next/head'
+import { signIn, signOut, useSession } from 'next-auth/client'
 
 export default function Home() {
-  return (
-    <>
-      <Head>
-        <title>Twichess</title>
-      </Head>
-      <h1>Twichess v1</h1>
-    </>
-  )
+  const [session, loading] = useSession()
+
+  return <>
+    {!session && <>
+      Not signed in <br />
+      <button onClick={() => signIn('twitch')}>Sign in</button>
+    </>}
+    {session && <>
+      Signed in as {session.user.name} <br />
+      <button onClick={() => signOut()}>Sign out</button>
+    </>}
+  </>
 }
