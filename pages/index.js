@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/client'
 
 export default function Home() {
@@ -11,6 +11,7 @@ export default function Home() {
     </>}
     {session && <>
       Signed in as {session.user.name} <br />
+      <Link href="/api/lichess/login">Login to lichess</Link> <br />
       <button onClick={() => signOut()}>Sign out</button>
     </>}
   </>
