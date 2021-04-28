@@ -1,32 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `Account` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Session` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `VerificationRequest` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-PRAGMA foreign_keys=off;
-DROP TABLE "Account";
-PRAGMA foreign_keys=on;
-
--- DropTable
-PRAGMA foreign_keys=off;
-DROP TABLE "Session";
-PRAGMA foreign_keys=on;
-
--- DropTable
-PRAGMA foreign_keys=off;
-DROP TABLE "User";
-PRAGMA foreign_keys=on;
-
--- DropTable
-PRAGMA foreign_keys=off;
-DROP TABLE "VerificationRequest";
-PRAGMA foreign_keys=on;
-
 -- CreateTable
 CREATE TABLE "accounts" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -74,6 +45,23 @@ CREATE TABLE "verification_requests" (
     "updated_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+-- CreateTable
+CREATE TABLE "lichess" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "username" TEXT NOT NULL,
+    "title" TEXT,
+    "countryCode" TEXT,
+    "updated_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "bulletRanking" INTEGER NOT NULL,
+    "bulletProv" BOOLEAN NOT NULL,
+    "blitzRanking" INTEGER NOT NULL,
+    "blitzProv" BOOLEAN NOT NULL,
+    "rapidRanking" INTEGER NOT NULL,
+    "rapidProv" BOOLEAN NOT NULL,
+    "userId" INTEGER NOT NULL,
+    FOREIGN KEY ("userId") REFERENCES "users" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "accounts.compound_id_unique" ON "accounts"("compound_id");
 
@@ -97,3 +85,9 @@ CREATE UNIQUE INDEX "users.email_unique" ON "users"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "verification_requests.token_unique" ON "verification_requests"("token");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "lichess.username_unique" ON "lichess"("username");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "lichess.userId_unique" ON "lichess"("userId");
