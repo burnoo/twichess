@@ -15,4 +15,4 @@ export const lichessOauth = new oauth.AuthorizationCode({
   }
 });
 
-export const lichessRedirectUrl = "https://localhost:3001/api/lichess/callback";
+export const lichessRedirectUrl = "http://localhost:3000/api/lichess/callback";

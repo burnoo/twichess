@@ -1,6 +1,8 @@
+import { getSession } from 'next-auth/client';
 import { lichessOauth, lichessRedirectUrl } from '../../../api/lichess';
 
 export default async (req, res) => {
+  const session = await getSession({ req })
   const token = await lichessOauth.getToken({
     code: req.query.code,
     redirect_uri: lichessRedirectUrl
@@ -10,5 +12,5 @@ export default async (req, res) => {
       'Authorization': `Bearer ${token.token.access_token}`
     }
   }).then(res => res.json());
-  res.send(`<h1>Success!</h1>Your lichess user info: <pre>${JSON.stringify(user)}</pre>`);
+  res.send(`<h1>Success!</h1>Your lichess user info: <pre>${JSON.stringify(user)}</pre><pre>${JSON.stringify(session)}`);
 }
