@@ -39,6 +39,6 @@ export default async (req, res) => {
   res.send(`<h1>Success!</h1>
   Your lichess user info: 
   <pre>${JSON.stringify(lichessUser)}</pre>
-  <pre>${JSON.stringify(session)}
+  <pre>${JSON.stringify(session)}</pre>
   <pre>${JSON.stringify(result)}</pre>`);
 }
