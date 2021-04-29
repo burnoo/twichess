@@ -1,9 +1,7 @@
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
 import Adapters from 'next-auth/adapters'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import prisma from '../../../utils/prisma'
 
 export default NextAuth({
   providers: [
@@ -13,4 +11,9 @@ export default NextAuth({
       }),
   ],
   adapter: Adapters.Prisma.Adapter({ prisma }),
+  callbacks: {
+    async session(session, user) {
+      return { ...session, userId: user.id }
+    },
+  }
 })

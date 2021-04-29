@@ -64,20 +64,20 @@ model VerificationRequest {
 }
 
 model Lichess {
-  id            Int      @id @default(autoincrement())
-  username      String   @unique
-  title         String?
-  countryCode   String?
-  updatedAt     DateTime @default(now()) @map(name: "updated_at")
-  bulletRanking Int
-  bulletProv    Boolean
-  blitzRanking  Int
-  blitzProv     Boolean
-  rapidRanking  Int
-  rapidProv     Boolean
-  
-  user          User     @relation(fields: [userId], references: [id])
-  userId        Int      @unique
+  id           Int      @id @default(autoincrement())
+  username     String   @unique
+  title        String?
+  countryCode  String?
+  updatedAt    DateTime @updatedAt
+  bulletRating Int
+  bulletProv   Boolean
+  blitzRating  Int
+  blitzProv    Boolean
+  rapidRating  Int
+  rapidProv    Boolean
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @unique
 
   @@map(name: "lichess")
 }

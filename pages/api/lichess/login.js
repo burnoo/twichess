@@ -1,4 +1,4 @@
-import { lichessOauth, lichessRedirectUrl } from '../../../api/lichess';
+import { lichessOauth, lichessRedirectUrl } from '../../../utils/lichess';
 
 export default (req, res) => {
   const authorizationUri = lichessOauth.authorizeURL({
