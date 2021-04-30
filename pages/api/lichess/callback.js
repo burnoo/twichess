@@ -16,6 +16,7 @@ export default async (req, res) => {
   const lichessData = {
     username: lichessUser.username,
     lichessId: lichessUser.id,
+    twitchName: session.user.name.toLowerCase(),
     title: lichessUser.title,
     countryCode: lichessUser.profile?.country,
     bulletRating: lichessUser.perfs.bullet.rating,

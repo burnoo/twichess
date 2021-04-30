@@ -67,6 +67,7 @@ model Lichess {
   id             Int      @id @default(autoincrement())
   lichessId      String   @unique
   username       String   @unique
+  twitchName     String // needed for insensitive quary TODO: can be removed when using postgres
   title          String?
   countryCode    String?
   updatedAt      DateTime @updatedAt
