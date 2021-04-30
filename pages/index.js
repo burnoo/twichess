@@ -16,6 +16,7 @@ export default function Home({ user }) {
     {user && user.lichess && <>
       Signed in as {user.name} <br />
       Lichess: {user.lichess.username}<br />
+      <Link href="/api/lichess/login">Update lichess data</Link> <br />
       <button onClick={() => signOut()}>Sign out</button>
     </>}
   </>
