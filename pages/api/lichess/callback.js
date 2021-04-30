@@ -4,17 +4,18 @@ import prisma from '../../../utils/prisma'
 
 export default async (req, res) => {
   const session = await getSession({ req })
-  const token = await lichessOauth.getToken({
+  const lichessToken = await lichessOauth.getToken({
     code: req.query.code,
     redirect_uri: lichessRedirectUrl
   });
   const lichessUser = await fetch('https://lichess.org/api/account', {
     headers: {
-      'Authorization': `Bearer ${token.token.access_token}`
+      'Authorization': `Bearer ${lichessToken.token.access_token}`
     }
   }).then(res => res.json());
   const lichessData = {
     username: lichessUser.username,
+    lichessId: lichessUser.id,
     title: lichessUser.title,
     countryCode: lichessUser.profile?.country,
     bulletRating: lichessUser.perfs.bullet.rating,
@@ -23,6 +24,9 @@ export default async (req, res) => {
     blitzProv: lichessUser.perfs.blitz.prov ?? false,
     rapidRating: lichessUser.perfs.rapid.rating,
     rapidProv: lichessUser.perfs.rapid.prov ?? false,
+    refreshToken: lichessToken.token.refresh_token,
+    accessToken: lichessToken.token.access_token,
+    tokenExpiresAt: lichessToken.token.expires_at
   }
   const result = await prisma.lichess.upsert({
     where: {
@@ -37,8 +41,8 @@ export default async (req, res) => {
     }
   })
   res.send(`<h1>Success!</h1>
-  Your lichess user info: 
   <pre>${JSON.stringify(lichessUser)}</pre>
   <pre>${JSON.stringify(session)}</pre>
-  <pre>${JSON.stringify(result)}</pre>`);
+  <pre>${JSON.stringify(result)}</pre>
+  <pre>${JSON.stringify(lichessToken)}</pre>`);
 }
