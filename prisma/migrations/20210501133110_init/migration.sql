@@ -74,6 +74,21 @@ CREATE TABLE "LichessToken" (
     FOREIGN KEY ("lichessDatabaseId") REFERENCES "lichess" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+-- CreateTable
+CREATE TABLE "Streamer" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "updatedAt" DATETIME NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "_LichessToStreamer" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL,
+    FOREIGN KEY ("A") REFERENCES "lichess" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY ("B") REFERENCES "Streamer" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "accounts.compound_id_unique" ON "accounts"("compound_id");
 
@@ -109,3 +124,12 @@ CREATE UNIQUE INDEX "lichess.userId_unique" ON "lichess"("userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "LichessToken_lichessDatabaseId_unique" ON "LichessToken"("lichessDatabaseId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Streamer.name_unique" ON "Streamer"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_LichessToStreamer_AB_unique" ON "_LichessToStreamer"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_LichessToStreamer_B_index" ON "_LichessToStreamer"("B");
