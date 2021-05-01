@@ -25,9 +25,13 @@ export default async (req, res) => {
     blitzProv: lichessUser.perfs.blitz.prov ?? false,
     rapidRating: lichessUser.perfs.rapid.rating,
     rapidProv: lichessUser.perfs.rapid.prov ?? false,
-    refreshToken: lichessToken.token.refresh_token,
-    accessToken: lichessToken.token.access_token,
-    tokenExpiresAt: lichessToken.token.expires_at
+    lichessToken: {
+      create: {
+        refreshToken: lichessToken.token.refresh_token,
+        accessToken: lichessToken.token.access_token,
+        expiresAt: lichessToken.token.expires_at
+      }
+    }
   }
   const result = await prisma.lichess.upsert({
     where: {

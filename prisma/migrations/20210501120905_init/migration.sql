@@ -60,11 +60,18 @@ CREATE TABLE "lichess" (
     "blitzProv" BOOLEAN NOT NULL,
     "rapidRating" INTEGER NOT NULL,
     "rapidProv" BOOLEAN NOT NULL,
-    "refreshToken" TEXT NOT NULL,
-    "accessToken" TEXT NOT NULL,
-    "tokenExpiresAt" DATETIME NOT NULL,
     "userId" INTEGER NOT NULL,
     FOREIGN KEY ("userId") REFERENCES "users" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "LichessToken" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "refreshToken" TEXT NOT NULL,
+    "accessToken" TEXT NOT NULL,
+    "expiresAt" DATETIME NOT NULL,
+    "lichessDatabaseId" INTEGER NOT NULL,
+    FOREIGN KEY ("lichessDatabaseId") REFERENCES "lichess" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateIndex
@@ -99,3 +106,6 @@ CREATE UNIQUE INDEX "lichess.username_unique" ON "lichess"("username");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "lichess.userId_unique" ON "lichess"("userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "LichessToken_lichessDatabaseId_unique" ON "LichessToken"("lichessDatabaseId");

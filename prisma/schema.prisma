@@ -64,25 +64,33 @@ model User {
 }
 
 model Lichess {
-  id             Int      @id @default(autoincrement())
-  lichessId      String   @unique
-  username       String   @unique
-  twitchName     String // needed for insensitive quary TODO: can be removed when using postgres
-  title          String?
-  countryCode    String?
-  updatedAt      DateTime @updatedAt
-  bulletRating   Int
-  bulletProv     Boolean
-  blitzRating    Int
-  blitzProv      Boolean
-  rapidRating    Int
-  rapidProv      Boolean
-  refreshToken   String
-  accessToken    String
-  tokenExpiresAt DateTime
+  id           Int           @id @default(autoincrement())
+  lichessId    String        @unique
+  username     String        @unique
+  twitchName   String // needed for insensitive quary TODO: can be removed when using postgres
+  title        String?
+  countryCode  String?
+  updatedAt    DateTime      @updatedAt
+  bulletRating Int
+  bulletProv   Boolean
+  blitzRating  Int
+  blitzProv    Boolean
+  rapidRating  Int
+  rapidProv    Boolean
+  lichessToken LichessToken?
 
   user   User @relation(fields: [userId], references: [id])
   userId Int  @unique
 
   @@map(name: "lichess")
+}
+
+model LichessToken {
+  id           Int      @id @default(autoincrement())
+  refreshToken String
+  accessToken  String
+  expiresAt    DateTime
+
+  lichess           Lichess @relation(fields: [lichessDatabaseId], references: [id])
+  lichessDatabaseId Int
 }

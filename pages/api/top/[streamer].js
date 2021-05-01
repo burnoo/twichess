@@ -11,18 +11,6 @@ export default async (req, res) => {
         in: viewers,
       },
     },
-    select: {
-      username: true,
-      twitchName: true,
-      title: true,
-      countryCode: true,
-      bulletRating: true,
-      bulletProv: true,
-      blitzRating: true,
-      blitzProv: true,
-      rapidRating: true,
-      rapidProv: true,
-    },
     orderBy: {
       blitzRating: 'desc'
     },
