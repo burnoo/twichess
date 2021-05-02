@@ -18,6 +18,7 @@ export default function Main({ children, isSignedIn }) {
   const [value, setValue] = useState('');
   return <Grommet full theme={theme}>
     <Head>
+      <title>twichess</title>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
     </Head>
     <Grid
