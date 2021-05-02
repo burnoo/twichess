@@ -39,7 +39,7 @@ export default function Main({ children, isSignedIn }) {
       >
         <Text size="large">twichess</Text>
         <Nav direction="row">
-          <Anchor href="#" label={isSignedIn ? "Logout" : "Login"} onClick={() => {isSignedIn ? signOut() : signIn('twitch')}}/>
+          <Anchor label={isSignedIn ? "Logout" : "Login"} onClick={() => {isSignedIn ? signOut() : signIn('twitch')}}/>
         </Nav>
       </Box>
       <Box
