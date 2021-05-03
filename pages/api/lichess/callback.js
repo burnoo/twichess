@@ -13,18 +13,22 @@ export default async (req, res) => {
       'Authorization': `Bearer ${lichessToken.token.access_token}`
     }
   }).then(res => res.json());
+  const bulletRating = lichessUser.perfs.bullet.rating;
+  const blitzRating = lichessUser.perfs.blitz.rating;
+  const rapidRating = lichessUser.perfs.rapid.rating;
   const lichessData = {
     username: lichessUser.username,
     lichessId: lichessUser.id,
     twitchName: session.user.name.toLowerCase(),
     title: lichessUser.title ?? null,
     countryCode: lichessUser.profile?.country ?? null,
-    bulletRating: lichessUser.perfs.bullet.rating,
+    bulletRating,
     bulletProv: lichessUser.perfs.bullet.prov ?? false,
-    blitzRating: lichessUser.perfs.blitz.rating,
+    blitzRating,
     blitzProv: lichessUser.perfs.blitz.prov ?? false,
-    rapidRating: lichessUser.perfs.rapid.rating,
+    rapidRating,
     rapidProv: lichessUser.perfs.rapid.prov ?? false,
+    topRating: Math.max(bulletRating, blitzRating, rapidRating)
   }
   const result = await prisma.lichess.upsert({
     where: {

@@ -60,6 +60,7 @@ CREATE TABLE "lichess" (
     "blitzProv" BOOLEAN NOT NULL,
     "rapidRating" INTEGER NOT NULL,
     "rapidProv" BOOLEAN NOT NULL,
+    "topRating" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
     FOREIGN KEY ("userId") REFERENCES "users" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );

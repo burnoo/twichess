@@ -30,7 +30,7 @@ const fetchLichessViewers = async (viewers) => {
       },
     },
     orderBy: {
-      blitzRating: 'desc'
+      topRating: 'desc'
     },
     take: 10
   });
