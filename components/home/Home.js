@@ -66,7 +66,7 @@ export default function Home({ user }) {
         value={value}
         onChange={event => setValue(event.target.value)}
       />
-      <Button label="Find streamer" onClick={() => { }} />
+      <Button label="Search" onClick={() => { }} />
     </Box>
   </Main>
 }
