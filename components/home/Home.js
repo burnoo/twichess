@@ -17,6 +17,7 @@ export default function Home({ user }) {
       background={{ color: 'light-4', opacity: 'strong' }}
       round
       gap="small"
+      flex={false}
     >
       {!user && <>
         <Text textAlign="center">Link your Twitch and lichess account<br></br>to setup twichess.</Text>
@@ -58,7 +59,8 @@ export default function Home({ user }) {
         </Link>
       </>}
     </Box>
-    <Box pad="large" align="center" background="dark-2" round gap="small">
+    <Box pad="large" align="center" background="dark-2" round gap="small" flex={false}>
+      <Text textAlign="center">Check out players currently watching<br/>streams:</Text>
       <TextInput
         placeholder="Enter streamer name"
         value={value}
