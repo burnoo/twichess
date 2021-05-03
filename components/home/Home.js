@@ -34,16 +34,22 @@ export default function Home({ user }) {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableCell scope="col" border="bottom">Bullet</TableCell>
-              <TableCell scope="col" border="bottom">Blitz</TableCell>
-              <TableCell scope="col" border="bottom">Rapid</TableCell>
+              {user.lichess.title &&
+                <TableCell scope="col" border="bottom" align="center">Title</TableCell>
+              }
+              <TableCell scope="col" border="bottom" align="center">Bullet</TableCell>
+              <TableCell scope="col" border="bottom" align="center">Blitz</TableCell>
+              <TableCell scope="col" border="bottom" align="center">Rapid</TableCell>
             </TableRow>
           </TableHeader>
           <TableBody>
             <TableRow>
-              <TableCell>{getRatingString(user.lichess.bulletRating, user.lichess.bulletProv)}</TableCell>
-              <TableCell>{getRatingString(user.lichess.blitzRating, user.lichess.blitzProv)}</TableCell>
-              <TableCell>{getRatingString(user.lichess.rapidRating, user.lichess.rapidProv)}</TableCell>
+              {user.lichess.title &&
+                <TableCell align="center">{user.lichess.title}</TableCell>
+              }
+              <TableCell align="center">{getRatingString(user.lichess.bulletRating, user.lichess.bulletProv)}</TableCell>
+              <TableCell align="center">{getRatingString(user.lichess.blitzRating, user.lichess.blitzProv)}</TableCell>
+              <TableCell align="center">{getRatingString(user.lichess.rapidRating, user.lichess.rapidProv)}</TableCell>
             </TableRow>
           </TableBody>
         </Table>
