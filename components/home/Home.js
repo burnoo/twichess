@@ -59,7 +59,7 @@ export default function Home({ user }) {
     </Box>
     <Box pad="large" align="center" background="dark-2" round gap="small" flex={false}>
       <Text textAlign="center">Check out players currently watching<br />streams:</Text>
-      <Form onSubmit={({ value }) => { router.push(`/streamer/${value.streamer}`); }}>
+      <Form onSubmit={({ value }) => { router.push(`/streamer/${value.streamer.toLowerCase()}`); }}>
         <FormField
           validate={{ regexp: twitchUsernameRegex, message: "Invalid Twitch username" }}
           name="streamer"
