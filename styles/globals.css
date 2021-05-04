@@ -9,7 +9,7 @@ body {
   src: url(https://lichess1.org/assets/_0dhxZ8/font/lichess.woff2);
 }
 
-[data-icon]::before {
+[data-lichess-icon]::before {
   font-size: 1.2em;
   vertical-align: middle;
   font-family: 'lichess';
@@ -17,6 +17,7 @@ body {
   font-weight: normal;
   text-transform: none;
   speak: none;
-  content: attr(data-icon);
+  content: attr(data-lichess-icon);
   opacity: 0.9;
+  padding-right: 5px;
 }
