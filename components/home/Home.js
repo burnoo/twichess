@@ -1,14 +1,13 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Box, Button, Text, TextInput, Table, TableBody, TableRow, TableHeader, TableCell } from 'grommet';
+import { Box, Button, Form, FormField, Text, TextInput, Table, TableBody, TableRow, TableHeader, TableCell } from 'grommet';
 import { useState } from 'react';
 import Main from '../Main';
 import { signIn } from 'next-auth/client';
-import { getRatingString } from '../../utils/lichess'
+import { getRatingString, twitchUsernameRegex } from '../../utils/string'
 
 export default function Home({ user }) {
   const router = useRouter();
-  const [value, setValue] = useState('');
   return <Main isSignedIn={user}>
     <Box
       pad="large"
@@ -60,19 +59,17 @@ export default function Home({ user }) {
     </Box>
     <Box pad="large" align="center" background="dark-2" round gap="small" flex={false}>
       <Text textAlign="center">Check out players currently watching<br />streams:</Text>
-      <TextInput
-        placeholder="Enter streamer name"
-        value={value}
-        onChange={event => setValue(event.target.value)}
-        onKeyPress={event => {
-          if (event.key === 'Enter') {
-            router.push(`/streamer/${value}`);
-          }
-        }}
-      />
-      <Link href={`/streamer/${value}`}>
-        <Button label="Search"/>
-      </Link>
+      <Form onSubmit={({ value }) => { router.push(`/streamer/${value.streamer}`); }}>
+        <FormField
+          validate={{ regexp: twitchUsernameRegex, message: "Invalid Twitch username" }}
+          name="streamer"
+        >
+          <TextInput placeholder="Enter streamer name" name="streamer" />
+        </FormField>
+        <Box alignContent="center">
+          <Button type="submit" label="Search" alignSelf="center" />
+        </Box>
+      </Form>
     </Box>
   </Main>
 }

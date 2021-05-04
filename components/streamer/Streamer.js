@@ -1,8 +1,11 @@
 import Main from '../Main';
 import { Text, DataTable } from 'grommet';
-import { getRatingString } from '../../utils/lichess'
+import { getRatingString } from '../../utils/string'
 
-export default function Streamer({ isSignedIn, lichessUsers }) {
+export default function Streamer({ isSignedIn, error, lichessUsers }) {
+  if (error) {
+    return <Main isSignedIn={isSignedIn}><Text>{error}</Text></Main>
+  }
   //TODO: use real data
   const testData = [
     {

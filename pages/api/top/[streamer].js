@@ -1,5 +1,6 @@
 import prisma from '../../../utils/prisma'
 import moment from 'moment'
+import { twitchUsernameRegex } from '../../../utils/string';
 
 const getLichessViewersFromCache = async (streamerName) => {
   const streamer = await prisma.streamer.findMany({
@@ -52,6 +53,10 @@ const cacheLichessViewers = async (streamer, lichessViewers) => {
 
 export default async (req, res) => {
   const { streamer } = req.query;
+  if(!streamer.match(twitchUsernameRegex)) {
+    res.status(500).send('Invalid Twitch username');
+    return;
+  }
   const cachedLichessViewers = await getLichessViewersFromCache(streamer);
   if (cachedLichessViewers) {
     res.send(JSON.stringify(cachedLichessViewers));
