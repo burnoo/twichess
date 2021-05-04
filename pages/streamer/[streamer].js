@@ -16,13 +16,10 @@ export async function getServerSideProps({ req, params }) {
       }
     }
   }
-  const apiUrl = `${process.env.APP_URL}/api/top/${params.streamer}`;
-  const lichessUsers = await fetch(apiUrl)
-    .then(res => res.json());
   return {
     props: {
       isSignedIn: session,
-      lichessUsers: JSON.parse(JSON.stringify(lichessUsers))
+      streamer: params.streamer
     }
   }
 }
