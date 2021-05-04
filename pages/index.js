@@ -1,5 +1,4 @@
-import Link from 'next/link'
-import { signIn, signOut, getSession } from 'next-auth/client'
+import { getSession } from 'next-auth/client'
 import prisma from '../utils/prisma'
 import Home from '../components/home/Home'
 

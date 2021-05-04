@@ -51,7 +51,7 @@ const cacheLichessViewers = async (streamer, lichessViewers) => {
 }
 
 export default async (req, res) => {
-  const { streamer } = req.query
+  const { streamer } = req.query;
   const cachedLichessViewers = await getLichessViewersFromCache(streamer);
   if (cachedLichessViewers) {
     res.send(JSON.stringify(cachedLichessViewers));

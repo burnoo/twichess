@@ -1,5 +1,5 @@
 import { getSession } from 'next-auth/client';
-import { lichessOauth, lichessRedirectUrl } from '../../../utils/lichess';
+import { lichessOauth, lichessRedirectUrl } from '../../../utils/lichess-oauth';
 import prisma from '../../../utils/prisma'
 
 export default async (req, res) => {
