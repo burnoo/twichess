@@ -5,6 +5,16 @@ import styles from '../../styles/PlayersTable.module.css'
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
+function OptionalWidgetBox({ widget, children }) {
+  if (widget) {
+    return <Box fill="true" align="center" justify="center">
+      {children}
+    </Box>
+  } else {
+    return children
+  }
+}
+
 export function PlayersTable({ streamer, widget }) {
   const { data, error } = useSWR(`/api/top/${streamer}`, fetcher, {
     revalidateOnFocus: false,
@@ -13,9 +23,9 @@ export function PlayersTable({ streamer, widget }) {
   });
 
   if (error)
-    return <Text>Failed to load</Text>;
+    return <OptionalWidgetBox widget={widget}><Text>Failed to load</Text></OptionalWidgetBox>;
   if (!data)
-    return <Text>Loading...</Text>;
+    return <OptionalWidgetBox widget={widget}><Text>Loading...</Text></OptionalWidgetBox>;
 
   let tableData = data.map((l, i) => ({
     index: i + 1,
@@ -33,14 +43,9 @@ export function PlayersTable({ streamer, widget }) {
     rating: 2837 - i * 100
   }));
   if (tableData.length == 0) {
-    const info = <Text size="large">No players currently watching this stream.</Text>
-    if(widget) {
-      return <Box fill="true" align="center" justify="center">
-        {info}
-      </Box>
-    } else {
-      return info
-    }
+    return <OptionalWidgetBox widget={widget}>
+      <Text size="large">No players currently watching this stream.</Text>
+    </OptionalWidgetBox>
   }
   return <DataTable
     style={{ maxWidth: widget ? null : "700px" }}
