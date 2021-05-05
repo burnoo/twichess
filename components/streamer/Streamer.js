@@ -10,7 +10,8 @@ export default function Streamer({ isSignedIn, error, streamer }) {
   return <Main isSignedIn={isSignedIn}>
     <Box direction="column" align="center" fill="horizontal">
       <Heading size="small">{streamer}</Heading>
-        <PlayersTable streamer={streamer} />
+      <PlayersTable streamer={streamer} />
+      <Text size="small" margin="medium">This page is refreshed automatically.</Text>
     </Box>
   </Main>
 }

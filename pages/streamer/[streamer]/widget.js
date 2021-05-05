@@ -10,7 +10,7 @@ export default function Page() {
 
   return <Grommet full theme={theme}>
     <Header />
-    <Box>
+    <Box fill="true">
       <PlayersTable streamer={streamer} widget/>
     </Box>
     </Grommet>

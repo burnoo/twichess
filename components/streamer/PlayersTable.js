@@ -32,7 +32,14 @@ export function PlayersTable({ streamer, widget }) {
     rating: 2837 - i * 100
   }));
   if (tableData.length == 0) {
-    return <Text>No players currently watching this stream</Text>
+    const info = <Text size="large">No players currently watching this stream.</Text>
+    if(widget) {
+      return <Box fill="true" align="center" justify="center">
+        {info}
+      </Box>
+    } else {
+      return info
+    }
   }
   return <DataTable
     style={{ maxWidth: widget ? null : "700px" }}
