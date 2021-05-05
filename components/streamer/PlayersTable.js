@@ -1,6 +1,7 @@
 import { Box, Text, DataTable } from 'grommet';
 import { getRatingString } from '../../utils/string';
 import useSWR from 'swr';
+import styles from '../../styles/PlayersTable.module.css'
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
@@ -43,8 +44,9 @@ export function PlayersTable({ streamer, widget }) {
   }
   return <DataTable
     style={{ maxWidth: widget ? null : "700px" }}
+    className={styles.playersTable}
     background={{
-      body: ['light-1', 'light-3'],
+      body: ['light-3', 'light-1'],
     }}
     pad={{ horizontal: 'medium', vertical: 'small' }}
     primaryKey={false}
