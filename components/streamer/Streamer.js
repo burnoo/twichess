@@ -8,9 +8,9 @@ export default function Streamer({ isSignedIn, error, streamer }) {
   }
 
   return <Main isSignedIn={isSignedIn}>
-    <Box direction="column" align="center">
+    <Box direction="column" align="center" fill="horizontal">
       <Heading size="small">{streamer}</Heading>
-      <PlayersTable streamer={streamer} />
+        <PlayersTable streamer={streamer} />
     </Box>
   </Main>
 }

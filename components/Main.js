@@ -1,27 +1,14 @@
-import Head from 'next/head';
+import Header from './Header'
 import Link from 'next/link';
 import { Grommet, Grid, Box, Button, Text, Nav, Anchor } from 'grommet';
 import { useState } from 'react';
 import { signIn, signOut } from 'next-auth/client';
-
-const theme = {
-  global: {
-    font: {
-      family: 'Roboto',
-      size: '18px',
-      height: '20px',
-    },
-  },
-};
+import theme from '../utils/theme'
 
 export default function Main({ children, isSignedIn }) {
   const [value, setValue] = useState('');
   return <Grommet full theme={theme}>
-    <Head>
-      <title>twichess</title>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
-      <link rel="preload" href="https://lichess1.org/assets/_0dhxZ8/font/lichess.woff2" as="font" type="font/woff2" crossorigin></link>
-    </Head>
+    <Header/>
     <Grid
       fill
       rows={['auto', 'flex']}

@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/client";
-import Streamer from "../../components/streamer/Streamer";
-import { twitchUsernameRegex } from "../../utils/string";
+import Streamer from "../../../components/streamer/Streamer";
+import { twitchUsernameRegex } from "../../../utils/string";
 
 export default function Page(props) {
   return <Streamer {...props} />
