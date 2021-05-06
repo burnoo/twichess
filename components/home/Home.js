@@ -18,7 +18,7 @@ export default function Home({ user }) {
       flex={false}
     >
       {!user && <>
-        <Text textAlign="center">Login with Twitch and link your lichess<br/>account to setup twichess.</Text>
+        <Text textAlign="center">Login with Twitch and link your lichess<br />account to setup twichess.</Text>
         <Button primary label="Login with Twitch" onClick={() => { signIn('twitch') }} margin={{ top: "small" }} />
       </>}
       {user && !user.lichess && <>

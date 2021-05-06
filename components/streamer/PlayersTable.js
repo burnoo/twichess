@@ -68,6 +68,11 @@ export function PlayersTable({ streamer, widget }) {
       {
         property: 'name',
         size: "3/4",
+        render: data => <Text>
+          <a href={`https://lichess.org/@/${data.name}`} target="_blank" className={styles.playerLink}>
+            {data.name}
+          </a>
+        </Text>
       },
       {
         property: 'rating',
