@@ -32,12 +32,7 @@ export default function Main({ children, isSignedIn }) {
         </Nav>
       </Box>
       <Box
-        gridArea="main" j
-        direction="row-responsive"
-        justify="center"
-        align="center"
-        pad="large"
-        gap="large"
+        gridArea="main"
       >
         {children}
       </Box>

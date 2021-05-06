@@ -51,6 +51,7 @@ const cacheLichessViewers = async (streamer, lichessViewers) => {
   });
 }
 
+// TODO get parameter 10/100
 export default async (req, res) => {
   const { streamer } = req.query;
   if(!streamer.match(twitchUsernameRegex)) {

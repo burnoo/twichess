@@ -35,13 +35,14 @@ export function PlayersTable({ streamer, widget }) {
     rating: getRatingString(l.topRating),
   }));
   //TODO: use real data
-  tableData = Array.from({ length: 10 }, (_, i) => ({
+  tableData = Array.from({ length: 100 }, (_, i) => ({
     index: i + 1,
     name: `pypel${i + 1}`,
     title: "GM",
     tempo: i % 2 == 0 ? 'bullet' : 'blitz',
     rating: 2837 - i * 100
   }));
+  if (widget) tableData = tableData.slice(0, 10);
   if (tableData.length == 0) {
     return <OptionalWidgetBox widget={widget}>
       <Text size="large">No players currently watching this stream.</Text>
@@ -50,11 +51,19 @@ export function PlayersTable({ streamer, widget }) {
   return <DataTable
     style={{ maxWidth: widget ? null : "700px" }}
     className={styles.playersTable}
+    theme={{
+      dataTable: {
+        pagination: {
+          container: <Box></Box>
+        }
+      }
+    }}
     background={{
       body: ['light-3', 'light-1'],
     }}
     pad={{ horizontal: 'medium', vertical: 'small' }}
-    primaryKey={false}
+    step={10}
+    paginate
     columns={[
       {
         property: 'index',
