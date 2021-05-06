@@ -8,7 +8,7 @@ export default function Streamer({ isSignedIn, error, streamer }) {
   }
 
   return <Main isSignedIn={isSignedIn}>
-    <Box direction="column" align="center" fill="horizontal">
+    <Box direction="column" align="center" fill="horizontal" flex="false">
       <Heading size="small">{streamer}</Heading>
       <PlayersTable streamer={streamer} />
       <Text margin={{top: "medium"}}><a href={`/streamer/${streamer}/widget`} target="_blank">widget for streamers</a></Text>
