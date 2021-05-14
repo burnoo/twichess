@@ -34,14 +34,6 @@ export default function PlayersTable({ streamer, widget }) {
     tempo: (l.topRating == l.rapidRating ? 'rapid' : l.topRating == l.blitzRating ? 'blitz' : 'bullet'),
     rating: getRatingString(l.topRating),
   }));
-  //TODO: use real data
-  tableData = Array.from({ length: 100 }, (_, i) => ({
-    index: i + 1,
-    name: `pypel${i + 1}`,
-    title: "GM",
-    tempo: i % 2 == 0 ? 'bullet' : 'blitz',
-    rating: 2837 - i * 100
-  }));
   if (widget) tableData = tableData.slice(0, 10);
   if (tableData.length == 0) {
     return <OptionalWidgetBox widget={widget}>
