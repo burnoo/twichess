@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-export default function Header() {
+export default function HtmlHead() {
   return <Head>
     <title>twichess</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
