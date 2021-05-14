@@ -1,6 +1,6 @@
 import HtmlHead from './common/HtmlHead';
 import Link from 'next/link';
-import { Grommet, Grid, Box, Button, Text, Nav, Anchor } from 'grommet';
+import { Grid, Box, Text, Nav, Anchor } from 'grommet';
 import { useState } from 'react';
 import { signIn, signOut } from 'next-auth/client';
 import AppGrommet from './common/AppGrommet';
@@ -35,7 +35,7 @@ export default function Main({ children, isSignedIn }) {
         pad={{ horizontal: 'medium', vertical: 'small' }}
         background="dark-1"
       >
-        <Navigation />
+        <Navigation isSignedIn/>
       </Box>
       <Box gridArea="main">
         {children}
