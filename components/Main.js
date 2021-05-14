@@ -35,7 +35,7 @@ export default function Main({ children, isSignedIn }) {
         pad={{ horizontal: 'medium', vertical: 'small' }}
         background="dark-1"
       >
-        <Navigation isSignedIn/>
+        <Navigation isSignedIn={isSignedIn}/>
       </Box>
       <Box gridArea="main">
         {children}
