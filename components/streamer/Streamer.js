@@ -10,7 +10,7 @@ export default function Streamer({ isSignedIn, error, streamer }) {
   return <Main isSignedIn={isSignedIn}>
     <Box flex={false} align="center" fill="horizontal">
       <Heading size="small">{streamer}</Heading>
-      <PlayersTable streamer />
+      <PlayersTable streamer={streamer} />
       <Text margin={{ top: "medium" }}>
         <a href={`/streamer/${streamer}/widget`} target="_blank">widget for streamers</a>
       </Text>
