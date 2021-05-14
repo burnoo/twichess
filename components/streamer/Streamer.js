@@ -8,17 +8,11 @@ export default function Streamer({ isSignedIn, error, streamer }) {
   }
 
   return <Main isSignedIn={isSignedIn}>
-    <Box direction="column" align="center" fill="horizontal">
-      <Box
-        flex={false}
-        align="center"
-        margin="none"
-      >
-        <Heading size="small">{streamer}</Heading>
-        <PlayersTable streamer={streamer} />
-        <Text margin={{ top: "medium" }}><a href={`/streamer/${streamer}/widget`} target="_blank">widget for streamers</a></Text>
-        <Text size="small" margin="medium">This page is refreshed automatically every ~120s.</Text>
-      </Box>
+    <Box flex={false} align="center" fill="horizontal">
+      <Heading size="small">{streamer}</Heading>
+      <PlayersTable streamer={streamer} />
+      <Text margin={{ top: "medium" }}><a href={`/streamer/${streamer}/widget`} target="_blank">widget for streamers</a></Text>
+      <Text size="small" margin="medium">This page is refreshed automatically every ~120s.</Text>
     </Box>
   </Main>
 }

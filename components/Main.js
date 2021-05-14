@@ -31,9 +31,7 @@ export default function Main({ children, isSignedIn }) {
           <Anchor label={isSignedIn ? "Logout" : "Login"} onClick={() => { isSignedIn ? signOut() : signIn('twitch') }} />
         </Nav>
       </Box>
-      <Box
-        gridArea="main"
-      >
+      <Box gridArea="main">
         {children}
       </Box>
     </Grid>
