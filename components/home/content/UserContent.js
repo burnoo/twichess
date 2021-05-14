@@ -1,6 +1,6 @@
 import { signIn } from 'next-auth/client';
 import Link from 'next/link'
-import { Button, Table, TableHeader, TableRow, TableCell, TableBody, Text } from 'grommet';
+import { Button, DataTable, Table, TableHeader, TableRow, TableCell, TableBody, Text } from 'grommet';
 import { getRatingString } from '../../../utils/string';
 
 export function GuestContent() {
@@ -21,30 +21,37 @@ export function UnlinkedContent() {
 }
 
 export function LinkedContent({ lichess }) {
+  let columns = [
+    {
+      property: 'bullet',
+      header: 'Bullet',
+      align: 'center',
+    },
+    {
+      property: 'blitz',
+      header: 'Blitz',
+      align: 'center',
+    },
+    {
+      property: 'rapid',
+      header: 'Rapid',
+      align: 'center',
+    },
+  ]
+  lichess.title && columns.unshift({property: 'title', header: 'Title', align: 'center'})
   return <>
     <Text pad>Linked lichess account: <b>{lichess.username}</b></Text>
-    <Table>
-      <TableHeader>
-        <TableRow>
-          {lichess.title &&
-            <TableCell scope="col" border="bottom" align="center">Title</TableCell>
-          }
-          <TableCell scope="col" border="bottom" align="center">Bullet</TableCell>
-          <TableCell scope="col" border="bottom" align="center">Blitz</TableCell>
-          <TableCell scope="col" border="bottom" align="center">Rapid</TableCell>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        <TableRow>
-          {lichess.title &&
-            <TableCell align="center">{lichess.title}</TableCell>
-          }
-          <TableCell align="center">{getRatingString(lichess.bulletRating, lichess.bulletProv)}</TableCell>
-          <TableCell align="center">{getRatingString(lichess.blitzRating, lichess.blitzProv)}</TableCell>
-          <TableCell align="center">{getRatingString(lichess.rapidRating, lichess.rapidProv)}</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+    <DataTable
+      primaryKey={false}
+      columns={columns}
+      align
+      data={[{
+        title: lichess.title,
+        bullet: getRatingString(lichess.bulletRating, lichess.bulletProv),
+        blitz: getRatingString(lichess.blitzRating, lichess.blitzProv),
+        rapid: getRatingString(lichess.rapidRating, lichess.rapidProv)
+      }]}
+    />
     <Link href="/api/lichess/login">
       <Button secondary label="Update lichess data" margin={{ top: "small" }} />
     </Link>
