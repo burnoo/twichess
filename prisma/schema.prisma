@@ -90,9 +90,7 @@ model Lichess {
 
 model LichessToken {
   id           Int      @id @default(autoincrement())
-  refreshToken String
   accessToken  String
-  expiresAt    DateTime
 
   lichess           Lichess @relation(fields: [lichessDatabaseId], references: [id])
   lichessDatabaseId Int
