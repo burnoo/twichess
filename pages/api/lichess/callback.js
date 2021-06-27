@@ -1,5 +1,5 @@
 import { getSession } from 'next-auth/client';
-import { pkceCache } from '../../../utils/cache';
+import { parseCookies } from 'nookies';
 import { lichessClientId, lichessOauth, lichessRedirectUrl } from '../../../utils/lichess-oauth';
 import prisma from '../../../utils/prisma'
 
@@ -64,7 +64,8 @@ const upsertData = async (session, lichessData, lichessToken) => {
 export default async (req, res) => {
   const session = await getSession({ req })
 
-  const verifier = await pkceCache.get(req.query.state)
+  const cookies = parseCookies({ req });
+  const verifier = cookies['code_verifier'];
   const lichessToken = await getLichessToken(req.query.code, verifier)
 
   if (!lichessToken.access_token) {
