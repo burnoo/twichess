@@ -30,7 +30,6 @@ export default async (req, res) => {
     redirect_uri: lichessRedirectUrl,
     scope: 'preference:read challenge:read challenge:write tournament:write',
     code_challenge_method: 'S256',
-    state: challenge,
     code_challenge: challenge
   }))
 }
