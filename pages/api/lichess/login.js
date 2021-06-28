@@ -1,5 +1,5 @@
 import crypto from 'crypto'
-import { lichessClientId, lichessRedirectUrl } from '../../../utils/lichess-oauth';
+import { lichessClientId, lichessRedirectUrl } from '../../../utils/server/lichess-oauth';
 import { setCookie } from 'nookies';
 
 const base64URLEncode = (str) => {
