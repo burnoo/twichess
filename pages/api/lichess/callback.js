@@ -1,6 +1,6 @@
 import { getSession } from 'next-auth/client';
 import { parseCookies } from 'nookies';
-import { lichessClientId, lichessOauth, lichessRedirectUrl } from '../../../utils/lichess-oauth';
+import { lichessClientId, lichessRedirectUrl } from '../../../utils/lichess-oauth';
 import prisma from '../../../utils/prisma'
 
 const getLichessToken = async (authCode, verifier) => await fetch('https://lichess.org/api/token', {
