@@ -1,4 +1,4 @@
-import prisma from '../../../../utils/prisma'
+import prisma from '../../../../utils/server/prisma'
 import moment from 'moment'
 import { twitchUsernameRegex } from '../../../../utils/string';
 
@@ -53,7 +53,7 @@ const fetchAvgRating = async (twitchViewers) => {
     },
     take: 10
   });
-  if (!aggregations._avg.topRating) return null
+  if(!aggregations._avg.topRating) return null
   return Math.round(aggregations._avg.topRating)
 }
 

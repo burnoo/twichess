@@ -1,5 +1,5 @@
 import { getSession } from 'next-auth/client'
-import prisma from '../utils/prisma'
+import prisma from '../utils/server/prisma'
 import Home from '../components/home/Home'
 
 export default function Page({ user }) {
