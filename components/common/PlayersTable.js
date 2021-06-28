@@ -21,13 +21,16 @@ export default function PlayersTable({ streamer, widget }) {
   if (!data)
     return <OptionalWidgetBox widget={widget}><Text>Loading...</Text></OptionalWidgetBox>;
 
-  let tableData = data.viewers.map((l, i) => ({
-    index: i + 1,
-    title: l.title,
-    name: l.lichessId,
-    tempo: (l.topRating == l.rapidRating ? 'rapid' : l.topRating == l.blitzRating ? 'blitz' : 'bullet'),
-    rating: getRatingString(l.topRating),
-  }));
+  let tableData = data.viewers.map((l, i) => {
+    const tempo = (l.topRating == l.rapidRating ? 'rapid' : l.topRating == l.blitzRating ? 'blitz' : 'bullet')
+    return {
+      index: i + 1,
+      title: l.title,
+      name: l.lichessId,
+      tempo: tempo,
+      rating: getRatingString(l.topRating, tempo == 'rapid' ? l.rapidProv : tempo == 'blitz' ? l.blitzProv : l.bulletProv),
+    }
+  });
   if (widget) tableData = tableData.slice(0, 10);
   if (tableData.length == 0) {
     return <OptionalWidgetBox widget={widget}>
