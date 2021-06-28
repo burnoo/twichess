@@ -2,7 +2,7 @@ import prisma from '../../../../utils/prisma'
 import moment from 'moment'
 import { twitchUsernameRegex } from '../../../../utils/string';
 
-const getLichessViewersFromCache = async (streamerName) => {
+const getResultFromCache = async (streamerName) => {
   const streamer = await prisma.streamerCache.findMany({
     where: {
       name: streamerName,
@@ -14,7 +14,11 @@ const getLichessViewersFromCache = async (streamerName) => {
       viewers: true
     }
   });
-  return streamer?.[0]?.viewers;
+  if (!streamer?.[0]) return null
+  return {
+    viewers: streamer?.[0]?.viewers,
+    avgViewersRating: streamer?.[0]?.avgViewersRating
+  };
 }
 
 const fetchTwitchViewers = async (streamer) => {
@@ -37,13 +41,30 @@ const fetchLichessViewers = async (twitchViewers) => {
   });
 }
 
-const cacheLichessViewers = async (streamer, lichessViewers) => {
+const fetchAvgRating = async (twitchViewers) => {
+  const aggregations = await prisma.lichess.aggregate({
+    where: {
+      twitchName: {
+        in: twitchViewers,
+      },
+    },
+    _avg: {
+      topRating: true
+    },
+    take: 10
+  });
+  if (!aggregations._avg.topRating) return null
+  return Math.round(aggregations._avg.topRating)
+}
+
+const cacheResult = async (streamer, lichessViewers, avgViewersRating) => {
   await prisma.streamerCache.deleteMany({
     where: { name: streamer }
   });
   await prisma.streamerCache.create({
     data: {
       name: streamer,
+      avgViewersRating,
       viewers: {
         connect: lichessViewers.map(lichess => ({ id: lichess.id }))
       }
@@ -58,14 +79,16 @@ export default async (req, res) => {
     res.status(500).send('Invalid Twitch username');
     return;
   }
-  let lichessViewers = await getLichessViewersFromCache(streamer);
-  if (!lichessViewers) {
+  let result = await getResultFromCache(streamer);
+  if (!result) {
     const twitchViewers = await fetchTwitchViewers(streamer);
-    lichessViewers = await fetchLichessViewers(twitchViewers);
-    await cacheLichessViewers(streamer, lichessViewers);
+    const lichessViewers = await fetchLichessViewers(twitchViewers);
+    const avgViewersRating = await fetchAvgRating(twitchViewers);
+    await cacheResult(streamer, lichessViewers, avgViewersRating);
+    result = {
+      viewers: lichessViewers,
+      avgViewersRating
+    }
   }
-  const response = {
-    viewers: lichessViewers
-  }
-  res.send(JSON.stringify(response))
+  res.send(JSON.stringify(result))
 }
