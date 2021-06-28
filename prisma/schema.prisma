@@ -83,23 +83,24 @@ model Lichess {
   user   User @relation(fields: [userId], references: [id])
   userId Int  @unique
 
-  watchingStreamers Streamer[]
+  watchingStreamers StreamerCache[]
 
   @@map(name: "lichess")
 }
 
 model LichessToken {
-  id           Int      @id @default(autoincrement())
-  accessToken  String
+  id          Int    @id @default(autoincrement())
+  accessToken String
 
   lichess           Lichess @relation(fields: [lichessDatabaseId], references: [id])
   lichessDatabaseId Int
 }
 
-model Streamer {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  updatedAt DateTime @updatedAt
+model StreamerCache {
+  id               Int      @id @default(autoincrement())
+  name             String   @unique
+  updatedAt        DateTime @updatedAt
+  avgViewersRating Int?
 
   viewers Lichess[]
 }

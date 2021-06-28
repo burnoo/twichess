@@ -3,7 +3,7 @@ import moment from 'moment'
 import { twitchUsernameRegex } from '../../../../utils/string';
 
 const getLichessViewersFromCache = async (streamerName) => {
-  const streamer = await prisma.streamer.findMany({
+  const streamer = await prisma.streamerCache.findMany({
     where: {
       name: streamerName,
       updatedAt: {
@@ -38,10 +38,10 @@ const fetchLichessViewers = async (twitchViewers) => {
 }
 
 const cacheLichessViewers = async (streamer, lichessViewers) => {
-  await prisma.streamer.deleteMany({
+  await prisma.streamerCache.deleteMany({
     where: { name: streamer }
   });
-  await prisma.streamer.create({
+  await prisma.streamerCache.create({
     data: {
       name: streamer,
       viewers: {
