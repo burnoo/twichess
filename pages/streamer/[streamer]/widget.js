@@ -5,5 +5,5 @@ export default function Page() {
   const router = useRouter()
   const { streamer } = router.query;
 
-  return <Widget streamer />
+  return <Widget streamer={streamer} />
 }

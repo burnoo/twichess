@@ -51,53 +51,54 @@ export default function PlayersTable({ streamer, widget }) {
       }
     }
   }}>
-      <DataTable
-        className={styles.playersTable}
-        background={{
-          body: ['light-3', 'light-1'],
-        }}
-        pad={{ horizontal: 'medium', vertical: 'small' }}
-        step={10}
-        paginate={!widget}
-        columns={[
-          {
-            property: 'index',
-            size: "1/16",
-          },
-          {
-            property: 'title',
-            size: "1/16",
-            render: data => <Text weight="bold">{data.title}</Text>
-          },
-          {
-            property: 'name',
-            size: "3/4",
-            render: data => <Text>
-              <a href={`https://lichess.org/@/${data.name}`} target="_blank" className={styles.playerLink}>
-                {data.name}
-              </a>
-            </Text>
-          },
-          {
-            property: 'rating',
-            size: "1/8",
-            render: data => {
-              let iconLetter;
-              switch (data.tempo) {
-                case 'rapid':
-                  iconLetter = '\uE017';
-                  break;
-                case 'bullet':
-                  iconLetter = "\uE047";
-                  break;
-                case 'blitz':
-                  iconLetter = '\uE01D';
-                  break;
-              }
-              return <Text data-lichess-icon={iconLetter}>{data.rating}</Text>;
+    {widget || <Text margin={{ bottom: "small" }}>Avg viewers rating: <b>{data.avgViewersRating}</b></Text>}
+    <DataTable
+      className={styles.playersTable}
+      background={{
+        body: ['light-3', 'light-1'],
+      }}
+      pad={{ horizontal: 'medium', vertical: 'small' }}
+      step={10}
+      paginate={!widget}
+      columns={[
+        {
+          property: 'index',
+          size: "1/16",
+        },
+        {
+          property: 'title',
+          size: "1/16",
+          render: data => <Text weight="bold">{data.title}</Text>
+        },
+        {
+          property: 'name',
+          size: "3/4",
+          render: data => <Text>
+            <a href={`https://lichess.org/@/${data.name}`} target="_blank" className={styles.playerLink}>
+              {data.name}
+            </a>
+          </Text>
+        },
+        {
+          property: 'rating',
+          size: "1/8",
+          render: data => {
+            let iconLetter;
+            switch (data.tempo) {
+              case 'rapid':
+                iconLetter = '\uE017';
+                break;
+              case 'bullet':
+                iconLetter = "\uE047";
+                break;
+              case 'blitz':
+                iconLetter = '\uE01D';
+                break;
             }
-          },
-        ]}
-        data={tableData} />
+            return <Text data-lichess-icon={iconLetter}>{data.rating}</Text>;
+          }
+        },
+      ]}
+      data={tableData} />
   </ThemeContext.Extend>
 }
