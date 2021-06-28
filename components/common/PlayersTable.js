@@ -1,7 +1,7 @@
 import { Box, Text, DataTable, ThemeContext } from 'grommet';
 import { getRatingString } from '../../utils/string';
 import styles from '../../styles/PlayersTable.module.css'
-import { useStreamerSWR } from '../../utils/streamer-api';
+import { useStreamerSWR } from '../../utils/client/streamer-swr';
 
 function OptionalWidgetBox({ widget, children }) {
   if (widget) {

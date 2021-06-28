@@ -1,5 +1,5 @@
 import { Heading, Box } from 'grommet';
-import { useStreamerSWR } from '../../utils/streamer-api';
+import { useStreamerSWR } from '../../utils/client/streamer-swr';
 import WidgetBox from './WidgetBox';
 
 export default function Page({ streamer }) {
