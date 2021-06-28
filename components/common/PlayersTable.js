@@ -16,7 +16,7 @@ function OptionalWidgetBox({ widget, children }) {
 }
 
 export default function PlayersTable({ streamer, widget }) {
-  const { data, error } = useSWR(`/api/top/${streamer}`, fetcher, {
+  const { data, error } = useSWR(`/api/app/streamer/${streamer}`, fetcher, {
     revalidateOnFocus: false,
     refreshInterval: 1000 * 45,
     refreshWhenHidden: true

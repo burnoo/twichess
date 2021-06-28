@@ -1,6 +1,6 @@
-import prisma from '../../../utils/prisma'
+import prisma from '../../../../utils/prisma'
 import moment from 'moment'
-import { twitchUsernameRegex } from '../../../utils/string';
+import { twitchUsernameRegex } from '../../../../utils/string';
 
 const getLichessViewersFromCache = async (streamerName) => {
   const streamer = await prisma.streamer.findMany({
