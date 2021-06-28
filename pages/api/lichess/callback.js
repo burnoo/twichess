@@ -21,7 +21,7 @@ const getLichessUser = async (accessToken) => await fetch('https://lichess.org/a
   }
 }).then(res => res.json());
 
-function getLichessData(lichessUser, username) {
+const getLichessData = (lichessUser, username) => {
   const bulletRating = lichessUser.perfs.bullet.rating;
   const blitzRating = lichessUser.perfs.blitz.rating;
   const rapidRating = lichessUser.perfs.rapid.rating;

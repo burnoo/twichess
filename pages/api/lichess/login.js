@@ -9,9 +9,7 @@ const base64URLEncode = (str) => {
     .replace(/=/g, '');
 }
 
-function sha256(buffer) {
-  return crypto.createHash('sha256').update(buffer).digest();
-}
+const sha256 = (buffer) => crypto.createHash('sha256').update(buffer).digest();
 
 const createVerifier = () => base64URLEncode(crypto.randomBytes(32));
 
