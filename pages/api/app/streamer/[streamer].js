@@ -17,17 +17,17 @@ const getLichessViewersFromCache = async (streamerName) => {
   return streamer?.[0]?.viewers;
 }
 
-const fetchViewers = async (streamer) => {
+const fetchTwitchViewers = async (streamer) => {
   const chatters = await fetch(`https://tmi.twitch.tv/group/user/${streamer}/chatters`)
     .then(res => res.json());
   return chatters.chatters.viewers;
 }
 
-const fetchLichessViewers = async (viewers) => {
+const fetchLichessViewers = async (twitchViewers) => {
   return prisma.lichess.findMany({
     where: {
       twitchName: {
-        in: viewers,
+        in: twitchViewers,
       },
     },
     orderBy: {
@@ -54,17 +54,18 @@ const cacheLichessViewers = async (streamer, lichessViewers) => {
 // TODO get parameter 10/100
 export default async (req, res) => {
   const { streamer } = req.query;
-  if(!streamer.match(twitchUsernameRegex)) {
+  if (!streamer.match(twitchUsernameRegex)) {
     res.status(500).send('Invalid Twitch username');
     return;
   }
-  const cachedLichessViewers = await getLichessViewersFromCache(streamer);
-  if (cachedLichessViewers) {
-    res.send(JSON.stringify(cachedLichessViewers));
-  } else {
-    const viewers = await fetchViewers(streamer);
-    const lichessViewers = await fetchLichessViewers(viewers);
+  let lichessViewers = await getLichessViewersFromCache(streamer);
+  if (!lichessViewers) {
+    const twitchViewers = await fetchTwitchViewers(streamer);
+    lichessViewers = await fetchLichessViewers(twitchViewers);
     await cacheLichessViewers(streamer, lichessViewers);
-    res.send(JSON.stringify(lichessViewers));
   }
+  const response = {
+    viewers: lichessViewers
+  }
+  res.send(JSON.stringify(response))
 }

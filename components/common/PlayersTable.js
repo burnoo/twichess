@@ -27,7 +27,7 @@ export default function PlayersTable({ streamer, widget }) {
   if (!data)
     return <OptionalWidgetBox widget={widget}><Text>Loading...</Text></OptionalWidgetBox>;
 
-  let tableData = data.map((l, i) => ({
+  let tableData = data.viewers.map((l, i) => ({
     index: i + 1,
     title: l.title,
     name: l.lichessId,
