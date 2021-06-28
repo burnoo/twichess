@@ -12,7 +12,10 @@ export default function Streamer({ isSignedIn, error, streamer }) {
       <Heading size="small">{streamer}</Heading>
       <PlayersTable streamer={streamer} />
       <Text margin={{ top: "medium" }}>
-        <a href={`/streamer/${streamer}/widget`} target="_blank">list widget for streamers</a>
+        <a href={`/streamer/${streamer}/widget/list`} target="_blank">list widget for streamers</a>
+      </Text>
+      <Text margin={{ top: "medium" }}>
+        <a href={`/streamer/${streamer}/widget/avg`} target="_blank">avg rating widget for streamers</a>
       </Text>
       <Text size="small" margin="medium">This page is refreshed automatically every ~120s.</Text>
     </Box>

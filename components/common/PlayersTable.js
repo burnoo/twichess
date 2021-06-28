@@ -1,9 +1,7 @@
 import { Box, Text, DataTable, ThemeContext } from 'grommet';
 import { getRatingString } from '../../utils/string';
-import useSWR from 'swr';
 import styles from '../../styles/PlayersTable.module.css'
-
-const fetcher = (...args) => fetch(...args).then(res => res.json());
+import { useStreamerSWR } from '../../utils/streamer-api';
 
 function OptionalWidgetBox({ widget, children }) {
   if (widget) {
@@ -16,11 +14,7 @@ function OptionalWidgetBox({ widget, children }) {
 }
 
 export default function PlayersTable({ streamer, widget }) {
-  const { data, error } = useSWR(`/api/app/streamer/${streamer}`, fetcher, {
-    revalidateOnFocus: false,
-    refreshInterval: 1000 * 45,
-    refreshWhenHidden: true
-  });
+  const { data, error } = useStreamerSWR(streamer);
 
   if (error)
     return <OptionalWidgetBox widget={widget}><Text>Failed to load</Text></OptionalWidgetBox>;

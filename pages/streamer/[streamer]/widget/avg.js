@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
-import Widget from '../../../components/widget/Widget'
+import AvgWidget from '../../../../components/widget/AvgWidget'
 
 export default function Page() {
   const router = useRouter()
   const { streamer } = router.query;
 
-  return <Widget streamer={streamer} />
+  return <AvgWidget streamer={streamer} />
 }
