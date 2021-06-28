@@ -85,13 +85,13 @@ export default function PlayersTable({ streamer, widget }) {
               let iconLetter;
               switch (data.tempo) {
                 case 'rapid':
-                  iconLetter = 'T';
+                  iconLetter = '\uE017';
                   break;
                 case 'bullet':
-                  iconLetter = ")";
+                  iconLetter = "\uE047";
                   break;
                 case 'blitz':
-                  iconLetter = '#';
+                  iconLetter = '\uE01D';
                   break;
               }
               return <Text data-lichess-icon={iconLetter}>{data.rating}</Text>;
