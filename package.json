@@ -10,19 +10,19 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^2.22.1",
-    "grommet": "^2.17.2",
-    "grommet-icons": "^4.5.0",
+    "@prisma/client": "^2.25.0",
+    "grommet": "^2.17.3",
+    "grommet-icons": "^4.6.0",
     "moment": "^2.29.1",
-    "next": "10.1.3",
-    "next-auth": "^3.17.2",
+    "next": "11.0.1",
+    "next-auth": "^3.27.1",
     "nookies": "^2.5.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "styled-components": "^5.2.3",
+    "styled-components": "^5.3.0",
     "swr": "^0.5.6"
   },
   "devDependencies": {
-    "prisma": "^2.22.1"
+    "prisma": "^2.25.0"
   }
 }
