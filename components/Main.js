@@ -1,21 +1,9 @@
 import HtmlHead from './common/HtmlHead';
-import Link from 'next/link';
-import { Grid, Box, Text, Nav, Anchor } from 'grommet';
-import { useState } from 'react';
-import { signIn, signOut } from 'next-auth/client';
+import { Grid, Box } from 'grommet';
 import AppGrommet from './common/AppGrommet';
-
-function Navigation({ isSignedIn }) {
-  return <>
-    <Link href="/" size="large"><Text style={{ cursor: 'pointer' }}>twichess</Text></Link>
-    <Nav direction="row">
-      <Anchor label={isSignedIn ? "Logout" : "Login"} onClick={() => { isSignedIn ? signOut() : signIn('twitch') }} />
-    </Nav>
-  </>
-}
+import Navigation from './navigation/Navigation';
 
 export default function Main({ children, isSignedIn }) {
-  const [value, setValue] = useState('');
   return <AppGrommet>
     <HtmlHead />
     <Grid
