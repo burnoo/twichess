@@ -1,4 +1,4 @@
-import { Box, Button, Form, FormField, Text, TextInput, ThemeContext } from 'grommet';
+import { Box, ThemeContext } from 'grommet';
 import Main from '../Main';
 import { SearchContainer, UserContainer } from './Containers'
 

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { signIn, signOut } from 'next-auth/client';
 import { Layer, Text, Nav, Anchor } from 'grommet';
 import React from 'react';
 
