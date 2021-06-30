@@ -19,6 +19,7 @@ function LichessPermissionsAnchor() {
         <Layer
           onEsc={() => setShow(false)}
           onClickOutside={() => setShow(false)}
+          onClick={() => setShow(false)}
         >
           <Text margin="medium">
             Although the site currently only saves user rankings, we also collect challenge and tournament permissions in advance for future functionalities.
