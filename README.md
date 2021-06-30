@@ -1,6 +1,10 @@
 # twichess
 A tool for streamers that links [Twitch][tw] viewers with their [lichess][li] accounts. It is available at [twichess.com][tch].
 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/17478192/123963224-8b55e380-d9b2-11eb-920b-445dbaab4d51.png" width="600" />
+</p>
+
 This is an early release. For now it has 2 features:
 - displaying viewers rating list
 - displaying average viewers ranking
@@ -70,5 +74,5 @@ Creating this project I wanted to create MVP quickly, because I wasted too much 
 [li]: https://lichess.org
 [tch]: https://twichess.com
 [tw]: https://twitch.tv
-[digi]: www.twitch.tv/digimonsterr
+[digi]: https://www.twitch.tv/digimonsterr
 [ext]: https://www.twitch.tv/p/extensions/
